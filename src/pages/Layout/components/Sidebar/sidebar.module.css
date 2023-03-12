@@ -1,0 +1,22 @@
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10%;
+    height: 100vh;
+    background-color: rgb(110, 110, 110);
+    padding: 10px 0 0 20px;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 1.8px;
+    border-right: solid 3px rgb(72, 72, 72);
+    transition: 0.3s linear;
+    display: flex;
+    flex-direction: column;
+}
+.close {
+    left: -21%;
+}
+.open {
+    left: 0;
+}

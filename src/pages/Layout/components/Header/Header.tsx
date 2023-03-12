@@ -8,10 +8,10 @@ interface IHeaderProps {
 export const Header: FC<IHeaderProps> = ({ toggleMenu }) => {
     return (
         <header className={styles.wrapper}>
-            <span className={styles.title}>Custom Components</span>
             <div className={styles.toggleMenu}>
                 <span onClick={toggleMenu}>Menu</span>
             </div>
+            <span className={styles.title}>Custom Components</span>
         </header>
     );
 };

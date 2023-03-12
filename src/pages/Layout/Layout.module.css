@@ -1,0 +1,10 @@
+.wrapper {
+    height: 100vh;
+    padding: 0 20px;
+    background-color: rgb(29, 32, 55);
+}
+.content {
+    height: 100vh;
+    margin-top: 60px;
+    color: rgb(249, 239, 225);
+}

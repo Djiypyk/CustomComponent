@@ -1,31 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Route, Routes } from 'react-router-dom';
+import { PATH } from './constant';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Main, Layout, Page404, Loaders } from './pages';
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-    </div>
-  )
-}
+const App = () => {
+    return (
+        <Routes>
+            <Route path={'/'} element={<Layout />}>
+                <Route index element={<Main />} />
+                <Route path={PATH.LOADERS} element={<Loaders />} />
+                <Route path={'*'} element={<Page404 />} />
+            </Route>
+        </Routes>
+    );
+};
 
-export default App
+export default App;

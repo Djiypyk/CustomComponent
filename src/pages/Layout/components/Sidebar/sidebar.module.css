@@ -3,20 +3,37 @@
     top: 0;
     left: 0;
     width: 10%;
+    min-width: 120px;
     height: 100vh;
     background-color: rgb(110, 110, 110);
-    padding: 10px 0 0 20px;
+    padding-top: 10px;
     font-size: 24px;
     font-weight: 900;
     letter-spacing: 1.8px;
     border-right: solid 3px rgb(72, 72, 72);
-    transition: 0.3s linear;
+    transition: 0.35s linear;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
+.link {
+    cursor: pointer;
+    margin-top: 10px;
+    color: aliceblue;
+}
+.link:hover {
+    color: black;
+}
+.closeLink {
+    font-size: 28px;
+}
+
 .close {
-    left: -21%;
+    left: -32%;
 }
 .open {
     left: 0;
+}
+.activeLink {
+    color: rgb(26, 26, 127);
 }

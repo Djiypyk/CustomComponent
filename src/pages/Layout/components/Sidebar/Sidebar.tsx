@@ -11,14 +11,27 @@ interface ISidebarProps {
 }
 
 export const Sidebar: FC<ISidebarProps> = ({ toggleMenu, isOpen }) => {
-    const menuStateStyle = isOpen ? styles.open : styles.close;
+    const menuStateStyle = `${styles.sidebar} ${isOpen ? styles.open : styles.close}`;
+
+    const onActive = (props: { isActive: boolean; isPending: boolean }) => {
+        const { isActive } = props;
+        return `${styles.link} ${isActive ? styles.activeLink : ''}`;
+    };
+
     return (
-        <nav className={styles.sidebar + ' ' + menuStateStyle}>
-            <NavLink to={PATH.MAIN} onClick={toggleMenu}>
+        <nav className={menuStateStyle}>
+            <span className={`${styles.closeLink} ${styles.link}`} onClick={toggleMenu}>
+                {' '}
+                &#10006;
+            </span>
+            <NavLink className={onActive} to={PATH.MAIN} onClick={toggleMenu}>
                 Home
             </NavLink>
-            <NavLink to={PATH.LOADERS} onClick={toggleMenu}>
+            <NavLink className={onActive} to={PATH.LOADERS} onClick={toggleMenu}>
                 Loaders
+            </NavLink>
+            <NavLink className={onActive} to={PATH.BUTTONS} onClick={toggleMenu}>
+                Buttons
             </NavLink>
         </nav>
     );

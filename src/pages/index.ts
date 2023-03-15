@@ -1,4 +1,4 @@
-export * from './Main'
+export * from './Home'
 export * from './Loaders'
 export * from './Navigation'
 export * from './Layout/components/Header'

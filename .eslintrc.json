@@ -1,0 +1,43 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"prettier"
+	],
+	"overrides": [
+		{
+			"files": ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
+			"rules": {
+				"@typescript-eslint/no-shadow": ["error"],
+				"no-shadow": "off",
+				"no-undef": "off"
+			}
+		}
+	],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module",
+		"project": "@typescript-eslint/parser"
+	},
+	"plugins": ["react", "@typescript-eslint", "react-hooks"],
+	"rules": {
+		"@typescript-eslint/no-var-requires": 0,
+		"prettier/prettier": "error",
+		"@typescript-eslint/no-unused-vars": "warn",
+		"no-shadow": "off",
+		"@typescript-eslint/no-shadow": ["error"]
+	},
+	"settings": {
+		"import/resolver": {
+			"typescript": true
+		}
+	}
+}

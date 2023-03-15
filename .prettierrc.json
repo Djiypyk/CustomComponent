@@ -1,8 +1,17 @@
 {
-    "tabWidth": 4,
-    "semi": true,
+    "tabWidth": 2,
+    "semi": false,
     "singleQuote": true,
     "jsxSingleQuote": true,
     "trailingComma": "all",
-    "printWidth": 100
+    "printWidth": 100,
+    "useTabs": true,
+    "endOfLine": "auto",
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "extends": [
+      "plugin:prettier/recommended",
+      "'prettier/flowtype",
+      "prettier/react"
+    ]
   }

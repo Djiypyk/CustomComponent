@@ -1,10 +1,9 @@
 .wrapper {
-    height: 100vh;
-    padding: 0 20px;
-    background-color: rgb(79, 79, 79);
+	height: 100vh;
+	padding: 0 20px;
 }
 .content {
-    height: 100vh;
-    padding-top: 80px;
-    color: rgb(249, 239, 225);
+	height: 100vh;
+	padding-top: 80px;
+	color: rgb(249, 239, 225);
 }

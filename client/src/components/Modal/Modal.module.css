@@ -1,0 +1,19 @@
+.wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(33, 33, 33, 0.7);
+}
+.wrapperBlock {
+	width: 20%;
+	height: 36%;
+	position: relative;
+	background-color: whitesmoke;
+}
+

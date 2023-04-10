@@ -1,23 +1,27 @@
 .wrapper {
-	width: 240px;
+	width: 280px;
 	height: 30px;
 	margin: 10px 0;
 }
 
 .isLabel {
-	margin-top: 14px;
+	margin-top: 10px;
 }
 .inputLabel {
-	font-size: 12px;
+	font-size: 20px;
 	font-weight: 600;
 	margin-left: 8px;
 }
 
 .input {
+	outline: 0;
+	background: rgb(115, 115, 115);
+	color: aliceblue;
 	width: 100%;
 	height: 100%;
-	padding: 5px 12px;
+	padding: 10px 12px;
 	border: none;
 	border-radius: 12px;
-	font-size: 12px;
+	font-size: 16px;
+	font-weight: 700;
 }

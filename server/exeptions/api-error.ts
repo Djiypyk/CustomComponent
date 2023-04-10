@@ -14,4 +14,7 @@ export class ApiError extends Error {
 	static BadRequest(message: string, errors: any = []) {
 		return new ApiError(400, message, errors)
 	}
+	static Other(error: string) {
+		return new ApiError(401, error)
+	}
 }

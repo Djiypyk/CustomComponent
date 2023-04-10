@@ -60,11 +60,34 @@ export class UserService {
 		}
 	}
 
-	async logout (refreshToken: string){
+	async logout(refreshToken: string) {
 		const token = await tokenService.removeToken(refreshToken)
 		return token
+	}
+	async refresh(refreshToken: string) {
+		if (!refreshToken) {
+			throw ApiError.UnauthorizedError()
+		}
+		const userData = tokenService.validateRefreshToken(refreshToken)
+		const tokenFromDb = await tokenService.findToken(refreshToken)
+		if (!userData || !tokenFromDb) {
+			throw ApiError.UnauthorizedError()
+		}
+		//@ts-ignore
+		const user = await UserModel.findById(userData.id)
+		//@ts-ignore
+		const userDto = new UserDto(user)
+		const tokens = tokenService.generateTokens({ ...userDto })
+		await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
-
+		return {
+			...tokens,
+			user: userDto,
+		}
+	}
+	async getAllUsers () {
+		const users = await UserModel.find()
+		return users
 	}
 }
 export default new UserService()

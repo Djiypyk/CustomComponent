@@ -1,14 +1,16 @@
 .wrapper {
+	min-width: 100px;
 	padding: 5px 10px;
 	text-align: center;
 	background-color: darkblue;
-	border-radius: 16px;
+	border-radius: 30px;
 }
 
 .button {
 	text-align: center;
 	color: aliceblue;
-	font-size: 14px;
+	font-size: 18px;
+	font-weight: 700;
 	border: none;
 	background: none;
 	cursor: pointer;

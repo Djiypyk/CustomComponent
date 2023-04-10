@@ -1,0 +1,15 @@
+.wrapper {
+	padding: 5px 10px;
+	text-align: center;
+	background-color: darkblue;
+	border-radius: 16px;
+}
+
+.button {
+	text-align: center;
+	color: aliceblue;
+	font-size: 14px;
+	border: none;
+	background: none;
+	cursor: pointer;
+}

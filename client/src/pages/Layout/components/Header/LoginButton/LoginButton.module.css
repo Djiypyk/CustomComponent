@@ -1,0 +1,21 @@
+.wrapper {
+	text-align: center;
+	border: none;
+	background: none;
+	font-size: 16px;
+	color: aliceblue;
+	cursor: pointer;
+    width: 70px;
+}
+
+.wrapper:hover {
+	color: aqua;
+	transition: 0.5s ease-in-out;
+}
+
+@media (max-width: 767px) {
+	.wrapper {
+		font-size: 10px;
+        width: 45px;
+	}
+}

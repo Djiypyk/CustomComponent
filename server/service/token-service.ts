@@ -13,7 +13,12 @@ export class TokenService {
 		return { accessToken, refreshToken }
 	}
 	async saveToken(userId: string, refreshToken: string) {
-		const tokenData = await tokenModel.findOne({})
+		const tokenData = await tokenModel.findOne({ user: userId })
+		return tokenData
+	}
+	async removeToken(refreshToken: string) {
+		const tokenData = await tokenModel.deleteOne({ refreshToken })
+		return tokenData
 	}
 }
 export default new TokenService()

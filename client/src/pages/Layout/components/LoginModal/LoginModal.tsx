@@ -1,13 +1,15 @@
 import { Button, Modal, TextInput } from '../../../../components'
 import { FC } from 'react'
 import styles from './LoginModal.module.css'
+import { useLogin } from 'pages/Layout/hooks'
 
 interface ILoginModalProps {
-    closeModal?(): void
-    isModal: boolean
+	closeModal?(): void
+	isModal: boolean
 }
 
-export const LoginModal: FC<ILoginModalProps> = ({closeModal, isModal}) => {
+export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal }) => {
+	const { email, password, changeEmail, changePassword } = useLogin()
 	return (
 		<Modal onClose={closeModal} isVisible={isModal}>
 			<div className={styles.modalWrapper}>
@@ -20,9 +22,9 @@ export const LoginModal: FC<ILoginModalProps> = ({closeModal, isModal}) => {
 				</div>
 
 				<div className={styles.inputBlock}>
-					<TextInput title='Email' />
+					<TextInput title='Email' value={email} onChange={changeEmail} />
 
-					<TextInput title='Password' />
+					<TextInput title='Password' value={password} onChange={changePassword} />
 				</div>
 
 				<div className={styles.buttonBlock}>

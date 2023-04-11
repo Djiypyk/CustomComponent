@@ -1,21 +1,27 @@
+import { observer } from 'mobx-react-lite'
 import { FC, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import { Header, LoginModal, Sidebar } from './components'
-import { useLogin } from './hooks'
 
 import styles from './Layout.module.css'
+
+export type LoginType = 'login' | 'signIn'
 
 export const Layout: FC = () => {
 	const [isOpenMenu, setIsOpenMenu] = useState(false)
 	const toggleMenu = () => setIsOpenMenu((prev) => !prev)
 	const [isLoginModal, setIsLoginModal] = useState(false)
+	const [loginType, setLoginType] = useState<LoginType | null>(null)
 
 	const closeLoginModal = () => setIsLoginModal(false)
-	const openLoginModal = () => setIsLoginModal(true)
+	const openLoginModal = (loginType: LoginType) => {
+		setLoginType(loginType)
+		setIsLoginModal(true)
+	}
 	return (
 		<div className={styles.wrapper}>
-			<LoginModal isModal={isLoginModal} closeModal={closeLoginModal} />
+			<LoginModal loginType={loginType} isModal={isLoginModal} closeModal={closeLoginModal} />
 			<Header openLoginModal={openLoginModal} toggleMenu={toggleMenu} />
 			<Sidebar toggleMenu={toggleMenu} isOpen={isOpenMenu} />
 			<main className={styles.content}>
@@ -24,4 +30,4 @@ export const Layout: FC = () => {
 		</div>
 	)
 }
-export default Layout
+export default observer(Layout)

@@ -7,11 +7,11 @@ export class UserController {
 
 	async registration(req: any, res: any, next: any) {
 		try {
-			const errors = validationResult(req)
+			// const errors = validationResult(req)
 
-			if (!errors.isEmpty()) {
-				return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
-			}
+			// if (!errors.isEmpty()) {
+			// 	return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
+			// }
 			const { email, password } = req.body
 			const userData = await userService.registration(email, password)
 			res.cookie('refreshToken', userData.refreshToken, {

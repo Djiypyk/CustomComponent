@@ -1,16 +1,20 @@
-import { FC, useState } from 'react'
+import { FC, useContext } from 'react'
+import { observer } from 'mobx-react-lite'
+
+import { LoginType } from '../../Layout'
 import { SVG } from '../../../../components'
 import { BurgerMenu } from '../../../../icons'
 import styles from './header.module.css'
 import { LoginButton } from './LoginButton'
+import { Context } from '../../../../main'
 
 interface IHeaderProps {
 	toggleMenu(): void
-	openLoginModal(): void
+	openLoginModal(loginType: LoginType): void
 }
 
 export const Header: FC<IHeaderProps> = ({ toggleMenu, openLoginModal }) => {
-	const [isLogin, setIsLogin] = useState(false)
+	const { isAuth: isLogin, logout, user, isLoading } = useContext(Context).store
 
 	return (
 		<header className={styles.wrapper}>
@@ -19,12 +23,21 @@ export const Header: FC<IHeaderProps> = ({ toggleMenu, openLoginModal }) => {
 					<BurgerMenu />
 				</SVG>
 			</div>
-			<h1 className={styles.title}>Custom Components</h1>
+			<h1 className={styles.title}>Custom Components {isLogin}</h1>
 			<div className={styles.loginBlock}>
-				<LoginButton onClick={openLoginModal}>{isLogin ? 'Logout' : 'Login'}</LoginButton>
-				{!isLogin && <LoginButton onClick={openLoginModal}>Sign in</LoginButton>}
+				{isLoading && '...'}
+				{!isLoading && (
+					<>
+						<LoginButton onClick={isLogin ? logout : () => openLoginModal('login')}>
+							{isLogin ? 'Logout' : 'Login'}
+						</LoginButton>
+						{!isLogin && (
+							<LoginButton onClick={() => openLoginModal('signIn')}>Sign In</LoginButton>
+						)}
+					</>
+				)}
 			</div>
 		</header>
 	)
 }
-export default Header
+export default observer(Header)

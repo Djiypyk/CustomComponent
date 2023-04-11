@@ -4,16 +4,14 @@ import styles from './Modal.module.css'
 
 interface IModalProps {
 	isVisible: boolean
-	onClose?(): void
+	onClose(): void
 	children: ReactNode
 }
 
 export const Modal: FC<IModalProps> = ({ isVisible, onClose, children }) => {
 	return isVisible ? (
 		<div className={styles.wrapper}>
-			<div className={styles.wrapperBlock}>
-				{children}
-			</div>
+			<div className={styles.wrapperBlock}>{children}</div>
 		</div>
 	) : null
 }

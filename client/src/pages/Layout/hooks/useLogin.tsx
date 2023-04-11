@@ -1,4 +1,6 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
+
+import { Context } from '../../../main'
 
 export const useLogin = () => {
 	const [email, setEmail] = useState<string>('')
@@ -10,5 +12,6 @@ export const useLogin = () => {
 	const changePassword = (e: ChangeEvent<HTMLInputElement>) => {
 		setPassword(e.currentTarget.value)
 	}
+
 	return { email, password, changeEmail, changePassword }
 }

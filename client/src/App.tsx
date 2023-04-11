@@ -1,10 +1,25 @@
+import { useContext, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { PATH } from './constant'
+import { observer } from 'mobx-react-lite'
+
 import styles from './app.module.css'
 
+import { PATH } from './constant'
 import { Home, Layout, Page404, Loaders } from './pages'
+import { Context } from './main'
 
-const App = () => {
+const App = observer(() => {
+	const { store } = useContext(Context)
+
+	useEffect(() => {
+		if (localStorage.getItem('token')) {
+			store.checkAuth()
+		}
+		
+	}, [])
+
+	const isAuth = store.isAuth
+	
 	return (
 		<>
 			<div className={styles.bg}></div>
@@ -20,6 +35,5 @@ const App = () => {
 			</Routes>
 		</>
 	)
-}
-
+})
 export default App

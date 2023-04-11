@@ -1,3 +1,5 @@
+import { observer } from 'mobx-react-lite'
+
 import { ContainerBlock } from '../../components'
 import styles from './Home.module.css'
 
@@ -14,4 +16,4 @@ export const Home = () => {
 	)
 }
 
-export default Home
+export default observer(Home)

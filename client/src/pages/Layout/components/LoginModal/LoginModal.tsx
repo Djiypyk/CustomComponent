@@ -45,26 +45,26 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 				<div className={styles.modalHeader}>
 					<span>{loginType === 'login' ? 'Login' : 'Sign In'}</span>
 				</div>
-	
-				<div className={styles.inputBlock}>
-				{!store.user.id && (
-					<>
-						<TextInput
-							title='Email:'
-							value={email}
-							onChange={changeEmail}
-							placeholder='Enter your email'
-						/>
 
-						<TextInput
-							type={'password'}
-							title='Password:'
-							value={password}
-							onChange={changePassword}
-							placeholder='Enter your password'
-						/>
-					</>
-				)}
+				<div>
+					{!store.user.id && (
+						<>
+							<TextInput
+								title='Email:'
+								value={email}
+								onChange={changeEmail}
+								placeholder='Enter your email'
+							/>
+
+							<TextInput
+								type={'password'}
+								title='Password:'
+								value={password}
+								onChange={changePassword}
+								placeholder='Enter your password'
+							/>
+						</>
+					)}
 					{!store.user.isActivated && store.user.id && (
 						<div className={styles.confirmEmail}>
 							<span>We sent an email to you to confirm your mail. Please confirm your email.</span>

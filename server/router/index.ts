@@ -1,7 +1,8 @@
-import userController from '../controlles/user-controller'
-import authMiddlewares from '../exeptions/middlewares/auth-middlewares'
 import { body } from 'express-validator'
 const Router = require('express').Router
+
+import userController from '../controlles/user-controller'
+import authMiddlewares from '../exeptions/middlewares/auth-middlewares'
 
 const router = new Router()
 

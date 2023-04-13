@@ -13,12 +13,17 @@
 }
 .wrapperBlock {
 	width: 20%;
-	min-width: 300px;
+	min-width: 400px;
 	height: 36%;
 	min-height: 460px;
-	padding: 0 20px ;
+	padding: 0 20px;
 	position: relative;
 	border: 3px grey solid;
 	background-color: whitesmoke;
 }
 
+@media (max-width: 760px) {
+	.wrapperBlock {
+		min-width: 300px;
+	}
+}

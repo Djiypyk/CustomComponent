@@ -1,12 +1,15 @@
-import { FC, useContext } from 'react'
+import { FC, useContext, useState } from 'react'
 import { observer } from 'mobx-react-lite'
+import Web3 from 'web3'
 
 import styles from './LoginModal.module.css'
 
 import { useLogin } from '../../hooks'
 import { LoginType } from '../../Layout'
-import { Button, Modal, TextInput } from '../../../../components'
+import { Button, Modal, TextInput, ConnectButton } from '../../../../components'
 import { Context } from '../../../../main'
+import { CLIENT_URL } from '../../../../constant'
+import { getLinker, mobileCheck } from './helpers'
 
 interface ILoginModalProps {
 	closeModal(): void
@@ -17,6 +20,10 @@ interface ILoginModalProps {
 export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginType }) => {
 	const { store } = useContext(Context)
 	const { email, password, changeEmail, changePassword } = useLogin()
+
+	const [loading, setLoading] = useState(false)
+	const [address, setAddress] = useState('')
+	console.log(address)
 
 	const onLogin = async () => {
 		await store.login(email, password)
@@ -33,6 +40,49 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 		if (store.error) {
 			return
 		}
+	}
+
+	const onPressConnect = async () => {
+		setLoading(true)
+
+		try {
+			const yourWebUrl = CLIENT_URL // Replace with your website domain
+			const deepLink = `https://metamask.app.link/dapp/${yourWebUrl}`
+			const downloadMetamaskUrl = 'https://metamask.io/download.html'
+
+			if (window && window.ethereum && window.ethereum.isMetaMask) {
+				if (window?.ethereum?.isMetaMask) {
+					// Desktop browser
+					const accounts = await window.ethereum.request({
+						method: 'eth_requestAccounts',
+					})
+
+					const account = await Web3.utils.toChecksumAddress(accounts[0])
+					setAddress(account)
+					await store.loginByEth(account)
+					console.log(store.error)
+					if (store.error) {
+						return
+					}
+					closeModal()
+				} else if (mobileCheck()) {
+					// Mobile browser
+					const linker = getLinker(downloadMetamaskUrl)
+					linker.openURL(deepLink)
+				} else {
+					window.open(downloadMetamaskUrl)
+				}
+			}
+		} catch (error) {
+			console.log(error)
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	const onPressLogout = async () => {
+		await store.logout()
+		setAddress('')
 	}
 
 	return (
@@ -73,9 +123,15 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 				</div>
 
 				<div className={styles.buttonBlock}>
-					<Button
+					<Button stylesProps={styles.buttonBlockPadding}
 						title={loginType === 'login' ? 'Log In' : 'Sign In'}
 						onClick={loginType === 'login' ? onLogin : onRegistration}
+					/>
+					<ConnectButton
+						onPressConnect={onPressConnect}
+						onPressLogout={onPressLogout}
+						loading={loading}
+						address={address}
 					/>
 				</div>
 			</div>

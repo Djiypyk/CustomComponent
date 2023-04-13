@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { makeAutoObservable } from 'mobx'
+import Web3 from 'web3'
 
 import AuthService from '../api/auth'
 import { AuthResponse, IUser } from '../api/types'
@@ -28,7 +29,28 @@ export default class Store {
 	login = async (email: string, password: string) => {
 		try {
 			const res = await AuthService.login(email, password)
-			console.log(res)
+
+			localStorage.setItem('token', res.data.accessToken)
+
+			this.setAuth(true)
+			this.setUser(res.data.user)
+			this.error = ''
+		} catch (err) {
+			if (err instanceof AxiosError) {
+				console.log(err.response?.data?.message)
+				this.error = err.response?.data?.message
+			}
+		}
+	}
+
+	loginByEth = async (ethAddress: string) => {
+		try {
+			const isValidEthAddress = Web3.utils.isAddress(ethAddress)
+			if (!isValidEthAddress) {
+				this.error = 'Wallet address not valid'
+				return
+			}
+			const res = await AuthService.loginByEth(ethAddress)
 
 			localStorage.setItem('token', res.data.accessToken)
 
@@ -79,17 +101,18 @@ export default class Store {
 		try {
 			const res = await axios.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true })
 			localStorage.setItem('token', res.data.accessToken)
+
 			this.setAuth(true)
 			this.setUser(res.data.user)
 			this.error = ''
+			console.log(this.user)
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				console.log(err.response?.data?.message)
 				this.error = err.response?.data?.message
+				this.setIsLoading(false)
 			}
 		} finally {
-			console.log('finnaly')
-
 			this.setIsLoading(false)
 		}
 	}

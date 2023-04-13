@@ -25,3 +25,7 @@
 	margin-top: 10px;
 	padding: 0 20px;
 }
+.buttonBlock{
+	display: flex;
+	justify-content: space-between;
+}

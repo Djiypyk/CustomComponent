@@ -8,15 +8,22 @@ import { PATH } from './constant'
 import { Home, Layout, Page404, Loaders } from './pages'
 import { Context } from './main'
 
+declare global {
+	interface Window {
+	  ethereum?: any;
+	}
+  }
+
+
 const App = observer(() => {
 	const { store } = useContext(Context)
 
-	useEffect(() => {
-		if (localStorage.getItem('token')) {
-			store.checkAuth()
-		}
+	// useEffect(() => {
+	// 	if (localStorage.getItem('token')) {
+	// 		store.checkAuth()
+	// 	}
 		
-	}, [])
+	// }, [])
 
 	const isAuth = store.isAuth
 	

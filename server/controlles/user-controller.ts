@@ -7,11 +7,11 @@ export class UserController {
 
 	async registration(req: any, res: any, next: any) {
 		try {
-			// const errors = validationResult(req)
+			const errors = validationResult(req)
 
-			// if (!errors.isEmpty()) {
-			// 	return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
-			// }
+			if (!errors.isEmpty()) {
+				return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
+			}
 			const { email, password } = req.body
 			const userData = await userService.registration(email, password)
 			res.cookie('refreshToken', userData.refreshToken, {
@@ -23,11 +23,28 @@ export class UserController {
 			next(e)
 		}
 	}
+
+	async loginByEth(req: any, res: any, next: any) {
+		try {
+			const { ethAddress } = req.body
+			if (ethAddress) {
+				const userData = await userService.loginByEth(ethAddress)
+				res.cookie('refreshToken', userData?.refreshToken, {
+					maxAge: 30 * 24 * 60 * 60 * 1000,
+					httpOnly: true,
+				})
+				return res.json(userData)
+			}
+		} catch (e) {
+			next(e)
+		}
+	}
 	async login(req: any, res: any, next: any) {
 		try {
 			const { email, password } = req.body
+
 			const userData = await userService.login(email, password)
-			res.cookie('refreshToken', userData.refreshToken, {
+			res.cookie('refreshToken', userData?.refreshToken, {
 				maxAge: 30 * 24 * 60 * 60 * 1000,
 				httpOnly: true,
 			})

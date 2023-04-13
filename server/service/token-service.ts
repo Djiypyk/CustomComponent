@@ -1,9 +1,14 @@
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import { Model } from 'mongoose'
 import tokenModel from '../models/token-model'
 
 export class TokenService {
-	generateTokens(payload: { email: string; id: string; isActivated: boolean }) {
+	generateTokens(payload: {
+		email?: string
+		id: string | JwtPayload
+		isActivated: boolean
+		ethAdress?: string
+	}) {
 		const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_TOKEN || 'jwt_key', {
 			expiresIn: '35m',
 		})

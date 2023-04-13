@@ -6,7 +6,7 @@ interface IButtonProps {
 	onClick?(): void
 	children?: ReactNode
 	title?: string
-	stylesProps?: HTMLAttributes<HTMLDivElement>
+	stylesProps?: string
 }
 
 export const Button: FC<IButtonProps> = ({ onClick, children, title = 'Button', stylesProps }) => {

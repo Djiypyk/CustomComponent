@@ -123,7 +123,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 				</div>
 
 				<div className={styles.buttonBlock}>
-					<Button
+					<Button stylesProps={styles.buttonBlockPadding}
 						title={loginType === 'login' ? 'Log In' : 'Sign In'}
 						onClick={loginType === 'login' ? onLogin : onRegistration}
 					/>

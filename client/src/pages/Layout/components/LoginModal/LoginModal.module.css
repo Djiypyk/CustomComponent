@@ -25,7 +25,20 @@
 	margin-top: 10px;
 	padding: 0 20px;
 }
-.buttonBlock{
+.buttonBlock {
 	display: flex;
 	justify-content: space-between;
+}
+.buttonBlockPadding {
+	margin-right: 10px;
+}
+@media (max-width: 760px) {
+	.buttonBlock {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.buttonBlockPadding {
+		margin-bottom: 10px;
+	}
 }

@@ -39,6 +39,19 @@ export class UserController {
 			next(e)
 		}
 	}
+
+	async changeUserData(req: any, res: any, next: any) {
+		try {
+			const { userId } = req.params
+			const { email, password } = req.body
+
+			const updatedUserData = await userService.updateUser(userId, { email, password })
+
+			return res.json(updatedUserData)
+		} catch (e) {
+			next(e)
+		}
+	}
 	async login(req: any, res: any, next: any) {
 		try {
 			const { email, password } = req.body

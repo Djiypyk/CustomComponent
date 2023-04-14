@@ -81,6 +81,19 @@ export class UserService {
 		}
 	}
 
+	async updateUser(id: string, updates: Partial<UserDto & {password: string}>) {
+		const user = await UserModel.findById(id)
+		if (!user) {
+			throw ApiError.Other(`User with id ${id} not found`)
+		}
+
+		Object.assign(user, updates)
+		await user.save()
+		//@ts-ignore
+		const userDto = new UserDto(user)
+		return userDto
+	}
+
 	async logout(refreshToken: string) {
 		const token = await tokenService.removeToken(refreshToken)
 		return token

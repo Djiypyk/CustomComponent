@@ -15,8 +15,10 @@ router.post(
 router.post('/login', userController.login)
 router.post('/loginByEth', userController.loginByEth)
 router.post('/logout', userController.logout)
+router.post('/updateUser/:userId', userController.changeUserData)
 router.get('/activate/:link', userController.activate)
 router.get('/refresh', userController.refresh)
 router.get('/users', authMiddlewares, userController.getUsers)
+
 
 export default router

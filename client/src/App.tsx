@@ -18,12 +18,12 @@ declare global {
 const App = observer(() => {
 	const { store } = useContext(Context)
 
-	// useEffect(() => {
-	// 	if (localStorage.getItem('token')) {
-	// 		store.checkAuth()
-	// 	}
+	useEffect(() => {
+		if (localStorage.getItem('token')) {
+			store.checkAuth()
+		}
 		
-	// }, [])
+	}, [])
 
 	const isAuth = store.isAuth
 	

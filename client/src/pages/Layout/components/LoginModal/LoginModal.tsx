@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react'
+import { FC, useContext, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import Web3 from 'web3'
 
@@ -21,7 +21,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [loading, setLoading] = useState(false)
-	const [address, setAddress] = useState('')
+	const addressRef = useRef('')
 
 	const onLogin = async () => {
 		await store.login(email, password)
@@ -48,7 +48,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 		setLoading(true)
 
 		try {
-			const yourWebUrl = CLIENT_URL 
+			const yourWebUrl = CLIENT_URL
 			const deepLink = `https://metamask.app.link/dapp/${yourWebUrl}`
 			const downloadMetamaskUrl = 'https://metamask.io/download.html'
 
@@ -60,9 +60,9 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 					})
 
 					const account = await Web3.utils.toChecksumAddress(accounts[0])
-					setAddress(account)
+					addressRef.current = account
 					await store.loginByEth(account)
-				
+
 					if (store.error) {
 						return
 					}
@@ -75,16 +75,15 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 					window.open(downloadMetamaskUrl)
 				}
 			}
-		} catch (error) {
-			console.log(error)
-		} finally {
 			setLoading(false)
+		} catch (error) {
+			setLoading(false)
+			console.log(error)
 		}
 	}
 
 	const onPressLogout = async () => {
 		await store.logout()
-		setAddress('')
 	}
 
 	return (
@@ -134,7 +133,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 						onPressConnect={onPressConnect}
 						onPressLogout={onPressLogout}
 						loading={loading}
-						address={address}
+						address={addressRef.current}
 					/>
 				</div>
 			</div>

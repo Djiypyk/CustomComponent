@@ -4,7 +4,6 @@ import Web3 from 'web3'
 
 import styles from './LoginModal.module.css'
 
-import { useLogin } from '../../hooks'
 import { LoginType } from '../../Layout'
 import { Button, Modal, TextInput, ConnectButton } from '../../../../components'
 import { Context } from '../../../../main'
@@ -19,18 +18,19 @@ interface ILoginModalProps {
 
 export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginType }) => {
 	const { store } = useContext(Context)
-	const { email, password, changeEmail, changePassword } = useLogin()
-
+	const [email, setEmail] = useState<string>('')
+	const [password, setPassword] = useState<string>('')
 	const [loading, setLoading] = useState(false)
 	const [address, setAddress] = useState('')
-	console.log(address)
 
 	const onLogin = async () => {
 		await store.login(email, password)
-		console.log(store.error)
+
 		if (store.error) {
 			return
 		}
+		setEmail('')
+		setPassword('')
 		closeModal()
 	}
 
@@ -40,13 +40,15 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 		if (store.error) {
 			return
 		}
+		setEmail('')
+		setPassword('')
 	}
 
 	const onPressConnect = async () => {
 		setLoading(true)
 
 		try {
-			const yourWebUrl = CLIENT_URL // Replace with your website domain
+			const yourWebUrl = CLIENT_URL 
 			const deepLink = `https://metamask.app.link/dapp/${yourWebUrl}`
 			const downloadMetamaskUrl = 'https://metamask.io/download.html'
 
@@ -60,7 +62,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 					const account = await Web3.utils.toChecksumAddress(accounts[0])
 					setAddress(account)
 					await store.loginByEth(account)
-					console.log(store.error)
+				
 					if (store.error) {
 						return
 					}
@@ -102,7 +104,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 							<TextInput
 								title='Email:'
 								value={email}
-								onChange={changeEmail}
+								onChange={setEmail}
 								placeholder='Enter your email'
 							/>
 
@@ -110,7 +112,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 								type={'password'}
 								title='Password:'
 								value={password}
-								onChange={changePassword}
+								onChange={setPassword}
 								placeholder='Enter your password'
 							/>
 						</>
@@ -123,7 +125,8 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 				</div>
 
 				<div className={styles.buttonBlock}>
-					<Button stylesProps={styles.buttonBlockPadding}
+					<Button
+						stylesProps={styles.buttonBlockPadding}
 						title={loginType === 'login' ? 'Log In' : 'Sign In'}
 						onClick={loginType === 'login' ? onLogin : onRegistration}
 					/>

@@ -2,7 +2,7 @@ import { ChangeEvent, FC, HTMLInputTypeAttribute } from 'react'
 import styles from './TextInput.module.css'
 
 interface ITextInputProps {
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+	onChange: (value: string) => void
 	value?: string
 	placeholder?: string
 	title?: string
@@ -17,6 +17,9 @@ export const TextInput: FC<ITextInputProps> = ({
 	title,
 	...props
 }) => {
+	const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+		onChange(e.currentTarget.value)
+	}
 	return (
 		<div className={styles.wrapper + ' ' + Boolean(title) ? styles.isLabel : ''}>
 			<label className={styles.inputLabel} htmlFor={title}>
@@ -27,7 +30,7 @@ export const TextInput: FC<ITextInputProps> = ({
 				className={styles.input}
 				placeholder={placeholder}
 				value={value}
-				onChange={onChange}
+				onChange={changeInputValue}
 				type={type}
 			/>
 		</div>

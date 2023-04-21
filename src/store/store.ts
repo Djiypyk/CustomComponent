@@ -1,8 +1,9 @@
+import Web3 from 'web3'
 import axios, { AxiosError } from 'axios'
 import { makeAutoObservable } from 'mobx'
-import Web3 from 'web3'
 
 import AuthService from '../api/auth'
+import UsersService from '../api/user'
 import { AuthResponse, IUser } from '../api/types'
 import { API_URL } from '../http'
 
@@ -29,6 +30,7 @@ export default class Store {
 	login = async (email: string, password: string) => {
 		try {
 			const res = await AuthService.login(email, password)
+			this.setUser(res.data.user)
 
 			localStorage.setItem('token', res.data.accessToken)
 
@@ -81,9 +83,21 @@ export default class Store {
 			}
 		}
 	}
+
+	updateUser = async () => {
+		try {
+			const rea = await UsersService.updateUser(this.user.id)
+		} catch (err) {
+			if (err instanceof AxiosError) {
+				console.log(err.response?.data?.message)
+				this.error = err.response?.data?.message
+			}
+		}
+	}
+
 	logout = async () => {
 		try {
-			const res = await AuthService.logout()
+			await AuthService.logout()
 			localStorage.removeItem('token')
 			this.setAuth(false)
 			this.setUser({} as IUser)

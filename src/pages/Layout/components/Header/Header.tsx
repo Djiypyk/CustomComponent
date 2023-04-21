@@ -1,11 +1,13 @@
 import { FC, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 
+import styles from './header.module.css'
+
+import { LoginButton } from './LoginButton'
+
 import { LoginType } from '../../Layout'
 import { SVG } from '../../../../components'
 import { BurgerMenu } from '../../../../icons'
-import styles from './header.module.css'
-import { LoginButton } from './LoginButton'
 import { Context } from '../../../../main'
 
 interface IHeaderProps {
@@ -32,7 +34,7 @@ export const Header: FC<IHeaderProps> = ({ toggleMenu, openLoginModal }) => {
 							{isLogin ? 'Logout' : 'Login'}
 						</LoginButton>
 						{!isLogin && (
-							<LoginButton onClick={() => openLoginModal('signIn')}>Sign In</LoginButton>
+							<LoginButton onClick={() => openLoginModal('signIn')}>Sign Up</LoginButton>
 						)}
 					</>
 				)}

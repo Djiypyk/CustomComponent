@@ -5,15 +5,14 @@ import { observer } from 'mobx-react-lite'
 import styles from './app.module.css'
 
 import { PATH } from './constant'
-import { Home, Layout, Page404, Loaders } from './pages'
+import { Home, Layout, Page404, Loaders, UserPage } from './pages'
 import { Context } from './main'
 
 declare global {
 	interface Window {
-	  ethereum?: any;
+		ethereum?: any
 	}
-  }
-
+}
 
 const App = observer(() => {
 	const { store } = useContext(Context)
@@ -22,11 +21,10 @@ const App = observer(() => {
 		if (localStorage.getItem('token')) {
 			store.checkAuth()
 		}
-		
 	}, [])
 
 	const isAuth = store.isAuth
-	
+
 	return (
 		<>
 			<div className={styles.bg}></div>
@@ -37,6 +35,7 @@ const App = observer(() => {
 				<Route path={'/'} element={<Layout />}>
 					<Route index element={<Home />} />
 					<Route path={PATH.LOADERS} element={<Loaders />} />
+					<Route path={PATH.USER_PAGE} element={<UserPage />} />
 					<Route path={'*'} element={<Page404 />} />
 				</Route>
 			</Routes>

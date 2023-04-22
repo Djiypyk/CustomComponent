@@ -15,8 +15,8 @@ interface IHeaderProps {
 	openLoginModal(loginType: LoginType): void
 }
 
-export const Header: FC<IHeaderProps> = ({ toggleMenu, openLoginModal }) => {
-	const { isAuth: isLogin, logout, user, isLoading } = useContext(Context).store
+export const Header: FC<IHeaderProps> = observer(({ toggleMenu, openLoginModal }) => {
+	const { store } = useContext(Context)
 
 	return (
 		<header className={styles.wrapper}>
@@ -25,15 +25,15 @@ export const Header: FC<IHeaderProps> = ({ toggleMenu, openLoginModal }) => {
 					<BurgerMenu />
 				</SVG>
 			</div>
-			<h1 className={styles.title}>Custom Components {isLogin}</h1>
+			<h1 className={styles.title}>Custom Components {store.isAuth}</h1>
 			<div className={styles.loginBlock}>
-				{isLoading && '...'}
-				{!isLoading && (
+				{store.isLoading && '...'}
+				{!store.isLoading && (
 					<>
-						<LoginButton onClick={isLogin ? logout : () => openLoginModal('login')}>
-							{isLogin ? 'Logout' : 'Login'}
+						<LoginButton onClick={store.isAuth ? store.logout : () => openLoginModal('login')}>
+							{store.isAuth ? 'Logout' : 'Login'}
 						</LoginButton>
-						{!isLogin && (
+						{!store.isAuth && (
 							<LoginButton onClick={() => openLoginModal('signIn')}>Sign Up</LoginButton>
 						)}
 					</>
@@ -41,5 +41,5 @@ export const Header: FC<IHeaderProps> = ({ toggleMenu, openLoginModal }) => {
 			</div>
 		</header>
 	)
-}
-export default observer(Header)
+})
+// export default observer(Header)

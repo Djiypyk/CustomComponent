@@ -113,18 +113,19 @@ export default class Store {
 	checkAuth = async () => {
 		this.setIsLoading(true)
 		try {
-			const res = await axios.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true })
+			const res = await axios.get<AuthResponse>(`${API_URL}refresh`, { withCredentials: true })
 			localStorage.setItem('token', res.data.accessToken)
 
 			this.setAuth(true)
 			this.setUser(res.data.user)
 			this.error = ''
 			console.log(this.user)
+			this.setIsLoading(false)
 		} catch (err) {
+			this.setIsLoading(false)
 			if (err instanceof AxiosError) {
 				console.log(err.response?.data?.message)
 				this.error = err.response?.data?.message
-				this.setIsLoading(false)
 			}
 		} finally {
 			this.setIsLoading(false)

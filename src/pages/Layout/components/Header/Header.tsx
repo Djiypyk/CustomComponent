@@ -43,4 +43,4 @@ export const Header: FC<IHeaderProps> = observer(({ toggleMenu, openLoginModal }
 	)
 })
 
-// export default observer(Header)
+export default Header

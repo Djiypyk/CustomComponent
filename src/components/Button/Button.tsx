@@ -7,12 +7,19 @@ interface IButtonProps {
 	children?: ReactNode
 	title?: string
 	stylesProps?: string
+	disabled?: boolean
 }
 
-export const Button: FC<IButtonProps> = ({ onClick, children, title = 'Button', stylesProps }) => {
+export const Button: FC<IButtonProps> = ({
+	onClick,
+	children,
+	title = 'Button',
+	stylesProps,
+	disabled,
+}) => {
 	return (
 		<div className={`${styles.wrapper} ${stylesProps}`}>
-			<button className={styles.button} onClick={onClick}>
+			<button className={styles.button} onClick={onClick} disabled={disabled}>
 				{children ? children : title}
 			</button>
 		</div>

@@ -16,12 +16,18 @@ interface ILoginModalProps {
 	loginType: LoginType | null
 }
 
-export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginType }) => {
+export const LoginModal: FC<ILoginModalProps> = observer(({ closeModal, isModal, loginType }) => {
 	const { store } = useContext(Context)
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [loading, setLoading] = useState(false)
 	const addressRef = useRef('')
+
+	const closeClearModal = () => {
+		setEmail('')
+		setPassword('')
+		closeModal()
+	}
 
 	const onLogin = async () => {
 		await store.login(email, password)
@@ -29,9 +35,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 		if (store.error) {
 			return
 		}
-		setEmail('')
-		setPassword('')
-		closeModal()
+		closeClearModal()
 	}
 
 	const onRegistration = async () => {
@@ -84,23 +88,26 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 
 	const onPressLogout = async () => {
 		await store.logout()
+		setPassword('')
+		setEmail('')
 	}
 
 	return (
-		<Modal onClose={closeModal} isVisible={isModal}>
+		<Modal onClose={closeClearModal} isVisible={isModal}>
 			<div className={styles.modalWrapper}>
-				<span onClick={closeModal} className={styles.closeModal}>
+				<span onClick={closeClearModal} className={styles.closeModal}>
 					{' '}
 					&#10006;
 				</span>
 				<div className={styles.modalHeader}>
 					<span>{loginType === 'login' ? 'Login' : 'Sign In'}</span>
 				</div>
-
+				{store.isLoading && <span className={styles.loading}>Loading...</span>}
 				<div>
 					{!store.user.id && (
 						<>
 							<TextInput
+								disabled={store.isLoading}
 								title='Email:'
 								value={email}
 								onChange={setEmail}
@@ -108,6 +115,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 							/>
 
 							<TextInput
+								disabled={store.isLoading}
 								type={'password'}
 								title='Password:'
 								value={password}
@@ -126,7 +134,8 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 				<div className={styles.buttonBlock}>
 					<Button
 						stylesProps={styles.buttonBlockPadding}
-						title={loginType === 'login' ? 'Log In' : 'Sign In'}
+						disabled={store.isLoading}
+						title={loginType === 'login' ? 'Log In' : 'Sign Up'}
 						onClick={loginType === 'login' ? onLogin : onRegistration}
 					/>
 					<ConnectButton
@@ -139,6 +148,6 @@ export const LoginModal: FC<ILoginModalProps> = ({ closeModal, isModal, loginTyp
 			</div>
 		</Modal>
 	)
-}
+})
 
-export default observer(LoginModal)
+export default LoginModal

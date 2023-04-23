@@ -28,6 +28,7 @@ export default class Store {
 	}
 
 	login = async (email: string, password: string) => {
+		this.setIsLoading(true)
 		try {
 			const res = await AuthService.login(email, password)
 			this.setUser(res.data.user)
@@ -37,15 +38,18 @@ export default class Store {
 			this.setAuth(true)
 			this.setUser(res.data.user)
 			this.error = ''
+			this.setIsLoading(false)
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				console.log(err.response?.data?.message)
 				this.error = err.response?.data?.message
+				this.setIsLoading(false)
 			}
 		}
 	}
 
 	loginByEth = async (ethAddress: string) => {
+		this.setIsLoading(true)
 		try {
 			const isValidEthAddress = Web3.utils.isAddress(ethAddress)
 			if (!isValidEthAddress) {
@@ -59,15 +63,18 @@ export default class Store {
 			this.setAuth(true)
 			this.setUser(res.data.user)
 			this.error = ''
+			this.setIsLoading(false)
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				console.log(err.response?.data?.message)
 				this.error = err.response?.data?.message
+				this.setIsLoading(false)
 			}
 		}
 	}
 
 	registration = async (email: string, password: string) => {
+		this.setIsLoading(true)
 		try {
 			const res = await AuthService.registration(email, password)
 			console.log(res.data)
@@ -76,10 +83,12 @@ export default class Store {
 			this.setAuth(true)
 			this.setUser(res.data.user)
 			this.error = ''
+			this.setIsLoading(false)
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				console.log(err.response?.data?.message)
 				this.error = err.response?.data?.message
+				this.setIsLoading(false)
 			}
 		}
 	}
@@ -119,7 +128,7 @@ export default class Store {
 			this.setAuth(true)
 			this.setUser(res.data.user)
 			this.error = ''
-			console.log(this.user)
+
 			this.setIsLoading(false)
 		} catch (err) {
 			this.setIsLoading(false)

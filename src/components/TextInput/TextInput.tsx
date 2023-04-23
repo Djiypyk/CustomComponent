@@ -7,6 +7,7 @@ interface ITextInputProps {
 	placeholder?: string
 	title?: string
 	type?: HTMLInputTypeAttribute | undefined
+	disabled?: boolean
 }
 
 export const TextInput: FC<ITextInputProps> = ({
@@ -15,6 +16,7 @@ export const TextInput: FC<ITextInputProps> = ({
 	placeholder,
 	type = 'text',
 	title,
+	disabled,
 	...props
 }) => {
 	const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +28,7 @@ export const TextInput: FC<ITextInputProps> = ({
 				{title}
 			</label>
 			<input
+				disabled={disabled}
 				name={title}
 				className={styles.input}
 				placeholder={placeholder}

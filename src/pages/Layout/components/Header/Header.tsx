@@ -17,6 +17,8 @@ interface IHeaderProps {
 	openLoginModal(loginType: LoginType): void
 }
 
+const isSmallWindowWidth = window.innerWidth <= 767
+
 export const Header: FC<IHeaderProps> = observer(({ toggleMenu, openLoginModal }) => {
 	const { store } = useContext(Context)
 
@@ -35,15 +37,21 @@ export const Header: FC<IHeaderProps> = observer(({ toggleMenu, openLoginModal }
 				{!store.isLoading && (
 					<>
 						{store.isAuth && (
-							<Link to={PATH.USER_PAGE}>
-								<LoginButton> Profile</LoginButton>
-							</Link>
+							<LoginButton>
+								<Link to={PATH.USER_PAGE} className={styles.headerLink}>
+									Profile
+								</Link>
+							</LoginButton>
 						)}
-						<LoginButton onClick={store.isAuth ? store.logout : () => openLoginModal('login')}>
-							{store.isAuth ? 'Logout' : 'Login'}
-						</LoginButton>
+						{!isSmallWindowWidth && store.isAuth && (
+							<LoginButton onClick={store.logout}>{'Logout'}</LoginButton>
+						)}
+
 						{!store.isAuth && (
-							<LoginButton onClick={() => openLoginModal('signIn')}>Sign Up</LoginButton>
+							<>
+								<LoginButton onClick={() => openLoginModal('login')}>{'Login'}</LoginButton>
+								<LoginButton onClick={() => openLoginModal('signIn')}>Sign Up</LoginButton>
+							</>
 						)}
 					</>
 				)}

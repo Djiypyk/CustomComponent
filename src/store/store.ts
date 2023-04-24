@@ -34,6 +34,7 @@ export default class Store {
 			this.setUser(res.data.user)
 
 			localStorage.setItem('token', res.data.accessToken)
+			localStorage.setItem('refreshToken', res.data.refreshToken)
 
 			this.setAuth(true)
 			this.setUser(res.data.user)
@@ -125,7 +126,7 @@ export default class Store {
 		try {
 			const refreshToken = localStorage.getItem('refreshToken')
 			const res = await AuthService.refresh(refreshToken ?? '')
-			
+
 			localStorage.setItem('token', res.data.accessToken)
 			localStorage.setItem('refreshToken', res.data.refreshToken)
 

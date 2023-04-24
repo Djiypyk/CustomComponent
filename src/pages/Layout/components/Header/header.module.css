@@ -33,6 +33,18 @@
 	color: rgb(114, 113, 113);
 }
 
+.loginBlock {
+	width: 146px;
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	text-align: center;
+	margin-right: -20px;
+}
+.headerLink {
+	color: inherit;
+}
+
 @media (max-width: 767px) {
 	.wrapper {
 		height: 50px;
@@ -41,13 +53,7 @@
 	.title {
 		font-size: 14px;
 	}
-}
-
-.loginBlock {
-	width: 146px;
-	display: flex;
-	justify-content: end;
-	align-items: center;
-	text-align: center;
-	margin-right: -20px;
+	.loginBlock {
+		width: 100px;
+	}
 }

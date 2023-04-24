@@ -1,0 +1,17 @@
+.wrapper {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.parent {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.avatar {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}

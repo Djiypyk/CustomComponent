@@ -5,8 +5,9 @@ import { observer } from 'mobx-react-lite'
 import styles from './app.module.css'
 
 import { PATH } from './constant'
-import { Home, Layout, Page404, Loaders, UserPage } from './pages'
+import { Home, Layout } from './pages'
 import { Context } from './main'
+import { Page404, Loaders, UserPage, Buttons } from './pages/Navigation'
 
 declare global {
 	interface Window {
@@ -35,6 +36,7 @@ const App = observer(() => {
 				<Route path={'/'} element={<Layout />}>
 					<Route index element={<Home />} />
 					<Route path={PATH.LOADERS} element={<Loaders />} />
+					<Route path={PATH.BUTTONS} element={<Buttons />} />
 					<Route path={PATH.USER_PAGE} element={<UserPage />} />
 					<Route path={'*'} element={<Page404 />} />
 				</Route>

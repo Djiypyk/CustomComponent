@@ -19,6 +19,7 @@
 .title {
 	font-size: 32px;
 	font-weight: 600;
+	color: aliceblue;
 }
 
 .toggleMenu {
@@ -43,9 +44,9 @@
 }
 
 .loginBlock {
-    width: 146px;
+	width: 146px;
 	display: flex;
-    justify-content: end;
+	justify-content: end;
 	align-items: center;
 	text-align: center;
 	margin-right: -20px;

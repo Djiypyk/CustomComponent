@@ -59,6 +59,7 @@ export default class Store {
 			const res = await AuthService.loginByEth(ethAddress)
 
 			localStorage.setItem('token', res.data.accessToken)
+			localStorage.setItem('refreshToken', res.data.refreshToken)
 
 			this.setAuth(true)
 			this.setUser(res.data.user)
@@ -77,9 +78,9 @@ export default class Store {
 		this.setIsLoading(true)
 		try {
 			const res = await AuthService.registration(email, password)
-			console.log(res.data)
 
 			localStorage.setItem('token', res.data.accessToken)
+			localStorage.setItem('refreshToken', res.data.refreshToken)
 			this.setAuth(true)
 			this.setUser(res.data.user)
 			this.error = ''
@@ -122,8 +123,11 @@ export default class Store {
 	checkAuth = async () => {
 		this.setIsLoading(true)
 		try {
-			const res = await axios.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true })
+			const refreshToken = localStorage.getItem('refreshToken')
+			const res = await AuthService.refresh(refreshToken ?? '')
+			
 			localStorage.setItem('token', res.data.accessToken)
+			localStorage.setItem('refreshToken', res.data.refreshToken)
 
 			this.setAuth(true)
 			this.setUser(res.data.user)

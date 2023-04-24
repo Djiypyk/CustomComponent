@@ -7,11 +7,12 @@
 		"eslint:recommended",
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
-		"prettier"
+		"prettier",
+		"plugin:import/typescript"
 	],
 	"overrides": [
 		{
-			"files": ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
+			"files": ["*.ts", "*.tsx"],
 			"rules": {
 				"@typescript-eslint/no-shadow": ["error"],
 				"no-shadow": "off",
@@ -27,13 +28,17 @@
 		"sourceType": "module",
 		"project": "@typescript-eslint/parser"
 	},
-	"plugins": ["react", "@typescript-eslint", "react-hooks"],
+	"plugins": ["react", "@typescript-eslint", "react-hooks", "import"],
 	"rules": {
+		"react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
 		"@typescript-eslint/no-var-requires": 0,
 		"prettier/prettier": "error",
 		"@typescript-eslint/no-unused-vars": "warn",
+		"no-use-before-define": "off",
+		"@typescript-eslint/no-use-before-define": ["error"],
 		"no-shadow": "off",
-		"@typescript-eslint/no-shadow": ["error"]
+		"@typescript-eslint/no-shadow": ["error"],
+		"import/prefer-default-export": "off"
 	},
 	"settings": {
 		"import/resolver": {

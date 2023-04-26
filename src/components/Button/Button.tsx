@@ -18,7 +18,11 @@ export const Button: FC<IButtonProps> = ({
 	disabled,
 }) => {
 	return (
-		<div className={`${styles.wrapper} ${stylesProps}`}>
+		<div
+			className={`${styles.wrapper} ${stylesProps} ${
+				disabled && styles.disabled
+			}`}
+		>
 			<button className={styles.button} onClick={onClick} disabled={disabled}>
 				{children ? children : title}
 			</button>

@@ -143,7 +143,9 @@ export const LoginModal: FC<ILoginModalProps> = observer(
 					<div className={styles.buttonBlock}>
 						<Button
 							stylesProps={styles.buttonBlockPadding}
-							disabled={store.isLoading}
+							disabled={
+								!(Boolean(email) && Boolean(password)) || store.isLoading
+							}
 							title={loginType === 'login' ? 'Log In' : 'Sign Up'}
 							onClick={loginType === 'login' ? onLogin : onRegistration}
 						/>

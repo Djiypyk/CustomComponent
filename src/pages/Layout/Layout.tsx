@@ -15,13 +15,19 @@ export const Layout: FC = () => {
 	const [loginType, setLoginType] = useState<LoginType | null>(null)
 
 	const closeLoginModal = () => setIsLoginModal(false)
+
 	const openLoginModal = (loginType: LoginType) => {
 		setLoginType(loginType)
 		setIsLoginModal(true)
 	}
+
 	return (
 		<div className={styles.wrapper}>
-			<LoginModal loginType={loginType} isModal={isLoginModal} closeModal={closeLoginModal} />
+			<LoginModal
+				loginType={loginType}
+				isModal={isLoginModal}
+				closeModal={closeLoginModal}
+			/>
 			<Header openLoginModal={openLoginModal} toggleMenu={toggleMenu} />
 			<Sidebar toggleMenu={toggleMenu} isOpen={isOpenMenu} />
 			<main className={styles.content}>

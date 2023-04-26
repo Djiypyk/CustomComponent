@@ -15,13 +15,13 @@ export const Modal: FC<IModalProps> = ({ open, onClose, children }) => {
 	const element = useMemo(() => document.createElement('div'), [])
 
 	useEffect(() => {
-		if (open && modalRootElement) {
-			modalRootElement.appendChild(element)
+		if (open) {
+			modalRootElement?.appendChild(element)
 			return () => {
-				modalRootElement.removeChild(element)
+				modalRootElement?.removeChild(element)
 			}
 		}
-	}, [])
+	}, [onClose, open])
 
 	const handleContentClick = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>,

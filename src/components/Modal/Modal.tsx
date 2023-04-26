@@ -21,7 +21,7 @@ export const Modal: FC<IModalProps> = ({ open, onClose, children }) => {
 				modalRootElement?.removeChild(element)
 			}
 		}
-	}, [onClose, open])
+	}, [open, modalRootElement])
 
 	const handleContentClick = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -39,6 +39,7 @@ export const Modal: FC<IModalProps> = ({ open, onClose, children }) => {
 			element,
 		)
 	}
+
 	return null
 }
 export default Modal

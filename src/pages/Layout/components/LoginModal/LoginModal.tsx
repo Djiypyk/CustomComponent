@@ -103,7 +103,6 @@ export const LoginModal: FC<ILoginModalProps> = observer(
 			<Modal onClose={closeClearModal} open={isModal}>
 				<div className={styles.modalWrapper}>
 					<span onClick={closeClearModal} className={styles.closeModal}>
-						{' '}
 						&#10006;
 					</span>
 					<div className={styles.modalHeader}>

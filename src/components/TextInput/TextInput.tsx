@@ -48,7 +48,7 @@ export const TextInput: FC<ITextInputProps> = ({
 						type !== 'password' ? 'text' : showPassword ? 'text' : 'password'
 					}
 				/>
-				{type === 'password' && (
+				{type === 'password' && value && (
 					<img
 						className={styles.passwordIcon}
 						onClick={() => setShowPassword((prev) => !prev)}

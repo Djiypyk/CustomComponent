@@ -1,18 +1,44 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useEffect, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 
 import styles from './Modal.module.css'
 
 interface IModalProps {
-	isVisible: boolean
+	open: boolean
 	onClose(): void
 	children: ReactNode
 }
 
-export const Modal: FC<IModalProps> = ({ isVisible, onClose, children }) => {
-	return isVisible ? (
-		<div className={styles.wrapper}>
-			<div className={styles.wrapperBlock}>{children}</div>
-		</div>
-	) : null
+const modalRootElement = document.querySelector('#modal')
+
+export const Modal: FC<IModalProps> = ({ open, onClose, children }) => {
+	const element = useMemo(() => document.createElement('div'), [])
+
+	useEffect(() => {
+		if (open && modalRootElement) {
+			modalRootElement.appendChild(element)
+			return () => {
+				modalRootElement.removeChild(element)
+			}
+		}
+	}, [])
+
+	const handleContentClick = (
+		event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+	) => {
+		event.stopPropagation()
+	}
+
+	if (open) {
+		return createPortal(
+			<div className={styles.wrapper} onClick={onClose}>
+				<div className={styles.wrapperBlock} onClick={handleContentClick}>
+					{children}
+				</div>
+			</div>,
+			element,
+		)
+	}
+	return null
 }
 export default Modal

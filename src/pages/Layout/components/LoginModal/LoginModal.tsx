@@ -100,7 +100,7 @@ export const LoginModal: FC<ILoginModalProps> = observer(
 		}
 
 		return (
-			<Modal onClose={closeClearModal} isVisible={isModal}>
+			<Modal onClose={closeClearModal} open={isModal}>
 				<div className={styles.modalWrapper}>
 					<span onClick={closeClearModal} className={styles.closeModal}>
 						{' '}

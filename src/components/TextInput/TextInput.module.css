@@ -6,7 +6,7 @@
 .inputWrapper {
 	position: relative;
 	width: 280px;
-	height: 100%;
+	/* height: 100%; */
 }
 
 .isLabel {

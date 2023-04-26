@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
 import styles from './Button.module.css'
 

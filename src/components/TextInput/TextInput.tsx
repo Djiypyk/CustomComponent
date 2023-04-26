@@ -12,6 +12,7 @@ interface ITextInputProps {
 	title?: string
 	type?: HTMLInputTypeAttribute | undefined
 	disabled?: boolean
+	stylesProps?: string
 }
 
 export const TextInput: FC<ITextInputProps> = ({
@@ -21,6 +22,7 @@ export const TextInput: FC<ITextInputProps> = ({
 	type = 'text',
 	title,
 	disabled,
+	stylesProps,
 	...props
 }) => {
 	const [showPassword, setShowPassword] = useState(false)
@@ -32,9 +34,9 @@ export const TextInput: FC<ITextInputProps> = ({
 			className={styles.wrapper + ' ' + Boolean(title) ? styles.isLabel : ''}
 		>
 			<label className={styles.inputLabel} htmlFor={title}>
-				{title}
+				{`${title}: `}
 			</label>
-			<div className={styles.inputWrapper}>
+			<div className={`${styles.inputWrapper} ${stylesProps}`}>
 				<input
 					disabled={disabled}
 					name={title}

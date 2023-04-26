@@ -4,8 +4,8 @@ import { makeAutoObservable } from 'mobx'
 
 import AuthService from '../api/auth'
 import UsersService from '../api/user'
-import { AuthResponse, IUser } from '../api/types'
-import { API_URL } from '../http'
+import { IUser } from '../api/types'
+
 
 export default class Store {
 	user = {} as IUser

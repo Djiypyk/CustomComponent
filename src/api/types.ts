@@ -1,5 +1,8 @@
 export interface IUser {
 	email?: string
+	location: string
+	name: string
+	workPosition: string
 	isActivated?: boolean
 	id: string
 	ethAddress?: string

@@ -1,0 +1,18 @@
+.header {
+	font-size: 24px;
+	font-weight: 800;
+	color: darkblue;
+}
+
+.wrapperBlock {
+    height: 100%;
+    padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+}
+
+.btn {
+    margin-top: 30px;
+}

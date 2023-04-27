@@ -1,12 +1,12 @@
-import { useContext, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
 import styles from './UserPage.module.css'
 
-import { Context } from '../../../main'
-import { ContainerBlock } from '../../../components'
-import { PATH } from '../../../constant'
+import { Context } from '~/main'
+import { ContainerBlock } from '~/components'
+import { PATH } from '~/constant'
 import { EditUserInfoModal, InfoField } from './components'
 
 import userIcon from '../../../assets/png/userIcon.png'
@@ -14,11 +14,15 @@ import { Edit } from '~/icons'
 
 export const UserPage = observer(() => {
 	const { store } = useContext(Context)
+	const navigate = useNavigate()
 	const [openEditModal, setOpenEditModal] = useState(false)
 
-	if (!store.isAuth && store.isLoading) {
-		return <Navigate to={PATH.MAIN} />
-	}
+	useEffect(() => {
+		if (!store.isAuth) {
+			navigate(PATH.MAIN)
+		}
+	}, [store.isAuth, navigate])
+
 	return (
 		<div className={styles.wrapper}>
 			<EditUserInfoModal

@@ -37,7 +37,7 @@ const App = observer(() => {
 					<Route index element={<Home />} />
 					<Route path={PATH.LOADERS} element={<Loaders />} />
 					<Route path={PATH.BUTTONS} element={<Buttons />} />
-					<Route path={PATH.USER_PAGE} element={<UserPage />} />
+					<Route path={`${PATH.USER_PAGE}/:userId`} element={<UserPage />} />
 					<Route path={'*'} element={<Page404 />} />
 				</Route>
 			</Routes>

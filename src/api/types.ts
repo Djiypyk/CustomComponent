@@ -13,3 +13,12 @@ export interface AuthResponse {
 	refreshToken: string
 	user: IUser
 }
+
+export interface IUpdateUser {
+	email?: string
+	password?: string
+	location?: string
+	name?: string
+	workPosition?: string
+	refreshToken: string
+}

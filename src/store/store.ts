@@ -4,8 +4,7 @@ import { makeAutoObservable } from 'mobx'
 
 import AuthService from '../api/auth'
 import UsersService from '../api/user'
-import { IUser } from '../api/types'
-
+import { IUpdateUser, IUser } from '../api/types'
 
 export default class Store {
 	user = {} as IUser
@@ -21,7 +20,7 @@ export default class Store {
 	}
 	setUser(user: IUser) {
 		this.user = user
-	}
+	}§
 
 	setIsLoading(isLoading: boolean) {
 		this.isLoading = isLoading
@@ -95,14 +94,26 @@ export default class Store {
 		}
 	}
 
-	updateUser = async () => {
+	updateUser = async (params: Omit<IUpdateUser, 'refreshToken'>) => {
+		this.setIsLoading(true)
 		try {
-			const rea = await UsersService.updateUser(this.user.id)
+			const refreshToken = localStorage.getItem('refreshToken')
+			if (refreshToken) {
+				const res = await UsersService.updateUser(this.user.id, {
+					...params,
+					refreshToken,
+				})
+				this.setUser(res.data.user)
+				localStorage.setItem('token', res.data.accessToken)
+				localStorage.setItem('refreshToken', res.data.refreshToken)
+			}
+			this.setIsLoading(false)
 		} catch (err) {
 			if (err instanceof AxiosError) {
 				console.log(err.response?.data?.message)
 				this.error = err.response?.data?.message
 			}
+			this.setIsLoading(false)
 		}
 	}
 

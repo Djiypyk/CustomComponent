@@ -114,7 +114,7 @@ export const LoginModal: FC<ILoginModalProps> = observer(
 							<>
 								<TextInput
 									disabled={store.isLoading}
-									title='Email:'
+									title='Email'
 									value={email}
 									onChange={setEmail}
 									placeholder='Enter your email'
@@ -123,7 +123,7 @@ export const LoginModal: FC<ILoginModalProps> = observer(
 								<TextInput
 									disabled={store.isLoading}
 									type={'password'}
-									title='Password:'
+									title='Password'
 									value={password}
 									onChange={setPassword}
 									placeholder='Enter your password'

@@ -20,8 +20,15 @@ export const EditUserInfoModal: FC<IEditUserInfoModal> = observer(
 		const [workPosition, setWorkPosition] = useState(store.user.workPosition)
 		const [password, setPassword] = useState('')
 
-		const saveProfile = () => {
-			console.log('save')
+		const saveProfile = async () => {
+			await store.updateUser({
+				email,
+				name: userName,
+				location,
+				workPosition,
+				password,
+			})
+
 			onClose()
 		}
 		return (
@@ -52,7 +59,11 @@ export const EditUserInfoModal: FC<IEditUserInfoModal> = observer(
 						type='password'
 					/>
 
-					<Button stylesProps={styles.btn} onClick={() => console.log('save')}>
+					<Button
+						disabled={store.isLoading}
+						stylesProps={styles.btn}
+						onClick={saveProfile}
+					>
 						Save Profile
 					</Button>
 				</div>

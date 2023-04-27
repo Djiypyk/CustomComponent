@@ -12,7 +12,7 @@
 	background-color: rgba(33, 33, 33, 0.7);
 }
 .wrapperBlock {
-	width: 20%;
+	/* width: 20%; */
 	min-width: 400px;
 	height: 36%;
 	min-height: 460px;

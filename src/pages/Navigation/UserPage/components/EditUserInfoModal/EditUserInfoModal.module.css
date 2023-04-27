@@ -3,6 +3,16 @@
 	font-weight: 800;
 	color: darkblue;
 }
+.modal {
+	height: auto;
+}
+.closeModal {
+	position: absolute;
+	font-size: 24px;
+	top: 8px;
+	right: 16px;
+	cursor: pointer;
+}
 
 .wrapperBlock {
     height: 100%;

@@ -4,17 +4,12 @@ import Web3 from 'web3'
 
 import styles from './LoginModal.module.css'
 
-import { LoginType } from '../../Layout'
-import {
-	Button,
-	Modal,
-	TextInput,
-	ConnectButton,
-	Loader,
-} from '../../../../components'
-import { Context } from '../../../../main'
-import { CLIENT_URL } from '../../../../constant'
 import { getLinker, mobileCheck } from './helpers'
+
+import { LoginType } from '../../Layout'
+import { Button, Modal, TextInput, ConnectButton, Loader } from '~/components'
+import { Context } from '~/main'
+import { CLIENT_URL } from '~/constant'
 
 interface ILoginModalProps {
 	closeModal(): void

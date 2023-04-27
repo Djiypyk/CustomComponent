@@ -38,35 +38,31 @@ export const Header: FC<IHeaderProps> = observer(
 				<div className={styles.loginBlock}>
 					{store.isLoading && '...'}
 					{!store.isLoading && (
-						<>
+						<div className={styles.loginBlockEnter}>
 							{store.isAuth && (
-								<LoginButton>
-									<Link
-										to={`${PATH.USER_PAGE}/${store.user.id}`}
-										className={styles.headerLink}
-									>
-										Profile
-									</Link>
-								</LoginButton>
+								<>
+									<LoginButton>
+										<Link
+											to={`${PATH.USER_PAGE}/${store.user.id}`}
+											className={styles.headerLink}
+										>
+											Profile
+										</Link>
+									</LoginButton>
+									<LoginButton onClick={store.logout}>Logout</LoginButton>
+								</>
 							)}
-							{
-								// !isSmallWindowWidth &&
-								store.isAuth && (
-									<LoginButton onClick={store.logout}>{'Logout'}</LoginButton>
-								)
-							}
-
 							{!store.isAuth && (
-								<div className={styles.loginBlockEnter}>
+								<>
 									<LoginButton onClick={() => openLoginModal('login')}>
 										Login
 									</LoginButton>
 									<LoginButton onClick={() => openLoginModal('signIn')}>
 										Sign Up
 									</LoginButton>
-								</div>
+								</>
 							)}
-						</>
+						</div>
 					)}
 				</div>
 			</header>

@@ -32,7 +32,10 @@ export const EditUserInfoModal: FC<IEditUserInfoModal> = observer(
 			onClose()
 		}
 		return (
-			<Modal open={open} onClose={onClose}>
+			<Modal stylesProps={styles.modal} open={open} onClose={onClose}>
+				<span onClick={onClose} className={styles.closeModal}>
+						&#10006;
+					</span>
 				<div className={styles.wrapperBlock}>
 					<span className={styles.header}>Edit profile</span>
 					<TextInput title={'Email'} value={email} onChange={setEmail} />

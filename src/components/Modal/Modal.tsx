@@ -7,11 +7,17 @@ interface IModalProps {
 	open: boolean
 	onClose(): void
 	children: ReactNode
+	stylesProps?: string
 }
 
 const modalRootElement = document.querySelector('#modal')
 
-export const Modal: FC<IModalProps> = ({ open, onClose, children }) => {
+export const Modal: FC<IModalProps> = ({
+	open,
+	onClose,
+	children,
+	stylesProps,
+}) => {
 	const element = useMemo(() => document.createElement('div'), [])
 
 	useEffect(() => {
@@ -32,7 +38,10 @@ export const Modal: FC<IModalProps> = ({ open, onClose, children }) => {
 	if (open) {
 		return createPortal(
 			<div className={styles.wrapper} onClick={onClose}>
-				<div className={styles.wrapperBlock} onClick={handleContentClick}>
+				<div
+					className={`${styles.wrapperBlock} ${stylesProps}`}
+					onClick={handleContentClick}
+				>
 					{children}
 				</div>
 			</div>,

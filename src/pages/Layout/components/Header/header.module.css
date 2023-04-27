@@ -7,7 +7,7 @@
 	padding: 0 40px;
 
 	display: flex;
-	justify-content: space-between;
+	justify-content:center;
 	text-align: center;
 	align-items: center;
 
@@ -23,10 +23,11 @@
 }
 
 .toggleMenu {
+	position: absolute;
+	top: 20%;
+	left: 20px;
 	cursor: pointer;
 	transition: 0.3s linear;
-	margin-right: 60px;
-	width: 24px;
 }
 
 .toggleMenu:hover {
@@ -34,13 +35,11 @@
 }
 
 .loginBlock {
-	width: 146px;
-	display: flex;
-	justify-content: end;
-	align-items: center;
-	text-align: center;
-	margin-right: -20px;
+	position: absolute;
+	top: 10%;
+	right: 20px;
 }
+
 .headerLink {
 	color: inherit;
 }
@@ -48,12 +47,19 @@
 @media (max-width: 767px) {
 	.wrapper {
 		height: 50px;
-		justify-content: flex-end;
+		padding: 0 20px;
+	}
+	.toggleMenu{
+		top: 10%;
 	}
 	.title {
 		font-size: 14px;
 	}
-	.loginBlock {
-		width: 100px;
+	.loginBlock{
+		right: 6px;
+	}
+	.loginBlockEnter {
+		display: flex;
+		flex-direction: column;
 	}
 }

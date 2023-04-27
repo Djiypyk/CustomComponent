@@ -4,11 +4,14 @@ interface ISVGProps extends SVGProps<SVGSVGElement> {
     viewBox?: string;
     children?: React.ReactNode;
     className?: string;
+    width?: string
+    height?: string
 }
 
-export const SVG: FC<ISVGProps> = ({ viewBox = '0 0 20 20', children, className, onClick }) => {
+export const SVG: FC<ISVGProps> = ({height = 24, width = 24 ,viewBox = '0 0 20 20', children, className, onClick }) => {
     return (
-        <svg
+        <svg width={width}
+        height={height}
             onClick={onClick}
             className={className}
             viewBox={viewBox}

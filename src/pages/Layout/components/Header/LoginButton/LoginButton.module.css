@@ -6,7 +6,7 @@
 	font-weight: 800;
 	color: aliceblue;
 	cursor: pointer;
-    width: 70px;
+    min-width: 70px;
 }
 
 .wrapper:hover {

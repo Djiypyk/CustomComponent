@@ -30,9 +30,11 @@ export const Header: FC<IHeaderProps> = observer(
 						<BurgerMenu />
 					</SVG>
 				</div>
+
 				<Link to={PATH.MAIN} className={styles.title}>
 					Custom Components
 				</Link>
+
 				<div className={styles.loginBlock}>
 					{store.isLoading && '...'}
 					{!store.isLoading && (
@@ -47,19 +49,22 @@ export const Header: FC<IHeaderProps> = observer(
 									</Link>
 								</LoginButton>
 							)}
-							{!isSmallWindowWidth && store.isAuth && (
-								<LoginButton onClick={store.logout}>{'Logout'}</LoginButton>
-							)}
+							{
+								// !isSmallWindowWidth &&
+								store.isAuth && (
+									<LoginButton onClick={store.logout}>{'Logout'}</LoginButton>
+								)
+							}
 
 							{!store.isAuth && (
-								<>
+								<div className={styles.loginBlockEnter}>
 									<LoginButton onClick={() => openLoginModal('login')}>
-										{'Login'}
+										Login
 									</LoginButton>
 									<LoginButton onClick={() => openLoginModal('signIn')}>
 										Sign Up
 									</LoginButton>
-								</>
+								</div>
 							)}
 						</>
 					)}

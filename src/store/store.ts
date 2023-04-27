@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import  { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { makeAutoObservable } from 'mobx'
 
 import AuthService from '../api/auth'
@@ -133,19 +133,22 @@ export default class Store {
 	}
 
 	checkAuth = async () => {
+		console.log('check')
 		this.setIsLoading(true)
 		try {
 			const refreshToken = localStorage.getItem('refreshToken')
-			const res = await AuthService.refresh(refreshToken ?? '')
+			if (refreshToken) {
+				const res = await AuthService.refresh(refreshToken)
 
-			localStorage.setItem('token', res.data.accessToken)
-			localStorage.setItem('refreshToken', res.data.refreshToken)
+				localStorage.setItem('token', res.data.accessToken)
+				localStorage.setItem('refreshToken', res.data.refreshToken)
 
-			this.setAuth(true)
-			this.setUser(res.data.user)
-			this.error = ''
+				this.setAuth(true)
+				this.setUser(res.data.user)
+				this.error = ''
 
-			this.setIsLoading(false)
+				this.setIsLoading(false)
+			}
 		} catch (err) {
 			this.setIsLoading(false)
 			if (err instanceof AxiosError) {

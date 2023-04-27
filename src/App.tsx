@@ -20,11 +20,11 @@ const App = observer(() => {
 
 	useEffect(() => {
 		if (localStorage.getItem('token')) {
-			store.checkAuth()
+			// store.checkAuth()
 		}
-	}, [])
+	}, [store.checkAuth])
 
-	const isAuth = store.isAuth
+	// const isAuth = store.isAuth
 
 	return (
 		<>

@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import axios, { AxiosError } from 'axios'
+import  { AxiosError } from 'axios'
 import { makeAutoObservable } from 'mobx'
 
 import AuthService from '../api/auth'
@@ -20,7 +20,7 @@ export default class Store {
 	}
 	setUser(user: IUser) {
 		this.user = user
-	}§
+	}
 
 	setIsLoading(isLoading: boolean) {
 		this.isLoading = isLoading

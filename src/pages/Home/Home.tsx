@@ -17,7 +17,7 @@ export const Home = () => {
 				opacity: 0,
 				y: -40,
 			},
-			{ opacity: 1, y: 0 },
+			{ opacity: 1, y: 0, zIndex: 0 },
 		)
 	}, [])
 

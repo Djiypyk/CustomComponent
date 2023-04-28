@@ -6,7 +6,7 @@ import { Header, LoginModal, Sidebar } from './components'
 
 import styles from './Layout.module.css'
 
-export type LoginType = 'login' | 'signIn'
+export type LoginType = 'login' | 'signUp'
 
 export const Layout: FC = () => {
 	const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -29,7 +29,11 @@ export const Layout: FC = () => {
 				closeModal={closeLoginModal}
 			/>
 			<Header openLoginModal={openLoginModal} toggleMenu={toggleMenu} />
-			<Sidebar toggleMenu={toggleMenu} isOpen={isOpenMenu} />
+			<Sidebar
+				toggleMenu={toggleMenu}
+				isOpen={isOpenMenu}
+				openLoginModal={openLoginModal}
+			/>
 			<main className={styles.content}>
 				<Outlet />
 			</main>

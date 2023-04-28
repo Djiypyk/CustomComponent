@@ -1,39 +1,63 @@
 .sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 10%;
-    min-width: 120px;
-    height: 100vh;
-    background-color: rgb(110, 110, 110);
-    padding-top: 10px;
-    font-size: 24px;
-    font-weight: 900;
-    letter-spacing: 1.8px;
-    border-right: solid 3px rgb(72, 72, 72);
-    transition: 0.35s linear;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 10%;
+	min-width: 120px;
+	height: 100vh;
+	background-color: rgb(110, 110, 110);
+	padding-top: 10px;
+	font-size: 24px;
+	font-weight: 900;
+	letter-spacing: 1.8px;
+	border-right: solid 3px rgb(72, 72, 72);
+	transition: 0.35s linear;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 .link {
-    cursor: pointer;
-    margin-top: 10px;
-    color: aliceblue;
+	cursor: pointer;
+	margin-top: 10px;
+	color: aliceblue;
 }
 .link:hover {
-    color: black;
+	color: black;
 }
 .closeLink {
-    font-size: 28px;
+	font-size: 28px;
 }
 
 .close {
-    left: -32%;
+	left: -32%;
 }
 .open {
-    left: 0;
+	left: 0;
 }
 .activeLink {
-    color: rgb(26, 26, 127);
+	color: rgb(26, 26, 127);
+}
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	padding-bottom: 20px;
+}
+.navBlock {
+	display: flex;
+	flex-direction: column;
+}
+.loginBlock {
+	display: flex;
+	flex-direction: column;
+}
+.loginBtn {
+	font-size: 20px;
+	color: white;
+	background: none;
+	border: none;
+}
+.loginBtn:hover {
+	color: aqua;
 }

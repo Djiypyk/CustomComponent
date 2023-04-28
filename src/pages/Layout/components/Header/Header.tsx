@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite'
 
 import styles from './header.module.css'
 
-import { LoginButton } from './LoginButton'
+import { LoginButton } from '../LoginButton'
 
 import { LoginType } from '../../Layout'
 import { SVG } from '../../../../components'
@@ -34,37 +34,38 @@ export const Header: FC<IHeaderProps> = observer(
 				<Link to={PATH.MAIN} className={styles.title}>
 					Custom Components
 				</Link>
-
-				<div className={styles.loginBlock}>
-					{store.isLoading && '...'}
-					{!store.isLoading && (
-						<div className={styles.loginBlockEnter}>
-							{store.isAuth && (
-								<>
-									<LoginButton>
-										<Link
-											to={`${PATH.USER_PAGE}/${store.user.id}`}
-											className={styles.headerLink}
-										>
-											Profile
-										</Link>
-									</LoginButton>
-									<LoginButton onClick={store.logout}>Logout</LoginButton>
-								</>
-							)}
-							{!store.isAuth && (
-								<>
-									<LoginButton onClick={() => openLoginModal('login')}>
-										Login
-									</LoginButton>
-									<LoginButton onClick={() => openLoginModal('signIn')}>
-										Sign Up
-									</LoginButton>
-								</>
-							)}
-						</div>
-					)}
-				</div>
+				{!isSmallWindowWidth && (
+					<div className={styles.loginBlock}>
+						{store.isLoading && '...'}
+						{!store.isLoading && (
+							<div className={styles.loginBlockEnter}>
+								{store.isAuth && (
+									<>
+										<LoginButton>
+											<Link
+												to={`${PATH.USER_PAGE}/${store.user.id}`}
+												className={styles.headerLink}
+											>
+												Profile
+											</Link>
+										</LoginButton>
+										<LoginButton onClick={store.logout}>Logout</LoginButton>
+									</>
+								)}
+								{!store.isAuth && (
+									<>
+										<LoginButton onClick={() => openLoginModal('login')}>
+											Login
+										</LoginButton>
+										<LoginButton onClick={() => openLoginModal('signUp')}>
+											Sign Up
+										</LoginButton>
+									</>
+								)}
+							</div>
+						)}
+					</div>
+				)}
 			</header>
 		)
 	},

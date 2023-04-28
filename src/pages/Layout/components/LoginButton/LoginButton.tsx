@@ -6,6 +6,7 @@ interface ILoginButtonProps {
 	onClick?(): void
 	disabled?: boolean
 	children?: ReactNode
+	className?:string
 }
 
 export const LoginButton: FC<ILoginButtonProps> = (props) => {

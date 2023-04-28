@@ -6,7 +6,7 @@
 	font-weight: 800;
 	color: aliceblue;
 	cursor: pointer;
-    min-width: 70px;
+	min-width: 70px;
 }
 
 .wrapper:hover {
@@ -17,6 +17,6 @@
 @media (max-width: 767px) {
 	.wrapper {
 		font-size: 10px;
-        width: 45px;
+		min-width: 45px;
 	}
 }

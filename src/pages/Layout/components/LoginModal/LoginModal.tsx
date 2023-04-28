@@ -101,7 +101,7 @@ export const LoginModal: FC<ILoginModalProps> = observer(
 						&#10006;
 					</span>
 					<div className={styles.modalHeader}>
-						<span>{loginType === 'login' ? 'Login' : 'Sign In'}</span>
+						<span>{loginType === 'login' ? 'Login' : 'Sign Up'}</span>
 					</div>
 					{store.isLoading && <Loader />}
 					<div>

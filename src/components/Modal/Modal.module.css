@@ -10,6 +10,7 @@
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(33, 33, 33, 0.7);
+	z-index: 100;
 }
 .wrapperBlock {
 	/* width: 20%; */

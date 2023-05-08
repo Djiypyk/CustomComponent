@@ -2,15 +2,15 @@ import { FC, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
+import { LoginType } from '../../Layout'
+import { SVG } from '~/components'
+import { BurgerMenu } from '~/icons'
+import { Context } from '~/main'
+import { PATH } from '~/constant'
+
 import styles from './header.module.css'
 
 import { LoginButton } from '../LoginButton'
-
-import { LoginType } from '../../Layout'
-import { SVG } from '../../../../components'
-import { BurgerMenu } from '../../../../icons'
-import { Context } from '../../../../main'
-import { PATH } from '../../../../constant'
 
 interface IHeaderProps {
 	toggleMenu(): void

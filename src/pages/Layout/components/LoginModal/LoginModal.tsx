@@ -2,15 +2,14 @@ import { FC, useContext, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import Web3 from 'web3'
 
-import styles from './LoginModal.module.css'
-
-import { getLinker, mobileCheck } from './helpers'
-
-import { LoginType } from '../../Layout'
 import { Button, Modal, TextInput, ConnectButton, Loader } from '~/components'
 import { Context } from '~/main'
 import { CLIENT_URL } from '~/constant'
 
+import styles from './LoginModal.module.css'
+import { getLinker, mobileCheck } from './helpers'
+
+import { LoginType } from '../../Layout'
 interface ILoginModalProps {
 	closeModal(): void
 	isModal: boolean

@@ -1,12 +1,13 @@
 import { observer } from 'mobx-react-lite'
 import { FC, useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { Context } from '~/main'
 
-import { PATH } from '../../../../constant'
-import { LoginButton } from '../LoginButton'
+import { Context } from '~/main'
+import { PATH } from '~/constant'
 
 import styles from './sidebar.module.css'
+
+import { LoginButton } from '../LoginButton'
 
 interface ISidebarProps {
 	isOpen: boolean

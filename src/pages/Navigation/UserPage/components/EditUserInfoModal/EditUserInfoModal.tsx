@@ -1,10 +1,10 @@
 import { FC, useContext, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 
-import styles from './EditUserInfoModal.module.css'
-
 import { Button, Modal, TextInput } from '~/components'
 import { Context } from '~/main'
+
+import styles from './EditUserInfoModal.module.css'
 
 interface IEditUserInfoModal {
 	onClose: () => void
@@ -34,8 +34,8 @@ export const EditUserInfoModal: FC<IEditUserInfoModal> = observer(
 		return (
 			<Modal stylesProps={styles.modal} open={open} onClose={onClose}>
 				<span onClick={onClose} className={styles.closeModal}>
-						&#10006;
-					</span>
+					&#10006;
+				</span>
 				<div className={styles.wrapperBlock}>
 					<span className={styles.header}>Edit profile</span>
 					<TextInput title={'Email'} value={email} onChange={setEmail} />

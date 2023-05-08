@@ -2,13 +2,11 @@ import { useContext, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import styles from './app.module.css'
-
 import { PATH } from './constant'
 import { Home, Layout } from './pages'
 import { Context } from './main'
 import { Page404, Loaders, UserPage, Buttons } from './pages/Navigation'
-
+import styles from './app.module.css'
 declare global {
 	interface Window {
 		ethereum?: any

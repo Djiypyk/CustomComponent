@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite'
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-import styles from './Home.module.css'
+import { ContainerBlock } from '~/components'
 
-import { ContainerBlock } from '../../components'
+import styles from './Home.module.css'
 
 export const Home = () => {
 	const containerBlockRef = useRef(null)

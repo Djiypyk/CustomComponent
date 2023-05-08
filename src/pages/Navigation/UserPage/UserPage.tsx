@@ -2,15 +2,14 @@ import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import styles from './UserPage.module.css'
-
 import { Context } from '~/main'
 import { ContainerBlock } from '~/components'
 import { PATH } from '~/constant'
-import { EditUserInfoModal, InfoField } from './components'
-
-import userIcon from '../../../assets/png/userIcon.png'
 import { Edit } from '~/icons'
+import userIcon from '~/assets/png/userIcon.png'
+
+import { EditUserInfoModal, InfoField } from './components'
+import styles from './UserPage.module.css'
 
 export const UserPage = observer(() => {
 	const { store } = useContext(Context)

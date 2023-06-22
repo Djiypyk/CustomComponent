@@ -1,3 +1,1 @@
-import Loaders from './Loaders'
-
-export * from './Loaders'
+export {LoadersAsync as Loaders} from './Loaders.async'

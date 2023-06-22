@@ -1,3 +1,1 @@
-import UserPage from './UserPage'
-
-export * from './UserPage'
+export { UserPageAsync as UserPage} from './UserPage.async'

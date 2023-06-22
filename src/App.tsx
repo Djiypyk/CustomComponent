@@ -1,45 +1,51 @@
-import { useContext, useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { observer } from 'mobx-react-lite'
+import React, {Suspense, useContext, useEffect} from 'react'
+import {Route, Routes} from 'react-router-dom'
+import {observer} from 'mobx-react-lite'
 
-import { PATH } from './constant'
-import { Home, Layout } from './pages'
-import { Context } from './main'
-import { Page404, Loaders, UserPage, Buttons } from './pages/Navigation'
+import {PATH} from './constant'
+import {Home, Layout} from './pages'
+import {Context} from './main'
+import {Page404, Loaders, UserPage, Buttons} from './pages/Navigation'
 import styles from './app.module.css'
+import {Loader} from "~/components";
+
 declare global {
-	interface Window {
-		ethereum?: any
-	}
+    interface Window {
+        ethereum?: any
+    }
 }
 
 const App = observer(() => {
-	const { store } = useContext(Context)
+    const {store} = useContext(Context)
 
-	useEffect(() => {
-		if (localStorage.getItem('token')) {
-			// store.checkAuth()
-		}
-	}, [store.checkAuth])
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            // store.checkAuth()
+        }
+    }, [store.checkAuth])
 
-	// const isAuth = store.isAuth
+    // const isAuth = store.isAuth
 
-	return (
-		<>
-			<div className={styles.bg}></div>
-			<div className={styles.bg + ' ' + styles.bg2}></div>
-			<div className={styles.bg + ' ' + styles.bg3}></div>
+    return (
+        <>
+            <div className={styles.bg}></div>
+            <div className={styles.bg + ' ' + styles.bg2}></div>
+            <div className={styles.bg + ' ' + styles.bg3}></div>
+            <Suspense fallback={<div className={styles.loader}>
+                <Loader/>
+            </div>}>
+                <Routes>
+                    <Route path={'/'} element={<Layout/>}>
+                        <Route index element={<Home/>}/>
+                        <Route path={PATH.LOADERS} element={<Loaders/>}/>
+                        <Route path={PATH.BUTTONS} element={<Buttons/>}/>
+                        <Route path={`${PATH.USER_PAGE}/:userId`} element={<UserPage/>}/>
+                        <Route path={'*'} element={<Page404/>}/>
+                    </Route>
+                </Routes>
+            </Suspense>
 
-			<Routes>
-				<Route path={'/'} element={<Layout />}>
-					<Route index element={<Home />} />
-					<Route path={PATH.LOADERS} element={<Loaders />} />
-					<Route path={PATH.BUTTONS} element={<Buttons />} />
-					<Route path={`${PATH.USER_PAGE}/:userId`} element={<UserPage />} />
-					<Route path={'*'} element={<Page404 />} />
-				</Route>
-			</Routes>
-		</>
-	)
+        </>
+    )
 })
 export default App

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import {lazy, useContext, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
@@ -52,3 +52,4 @@ export const UserPage = observer(() => {
 })
 
 export default UserPage
+

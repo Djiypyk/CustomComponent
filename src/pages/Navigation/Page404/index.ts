@@ -1,3 +1,1 @@
-import Page404 from './Page404';
-
-export * from './Page404';
+export { Page404Async as Page404 } from './Page404.async'

@@ -1,3 +1,1 @@
-import Buttons from './Buttons'
-
-export * from './Buttons'
+export {ButtonsAsync as Buttons} from './Buttons.async'
